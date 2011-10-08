@@ -13,6 +13,7 @@
 #define ACCESS_TOKEN @"access_token"
 #define IS_UPDATE_STATUS @"is_update_status"
 #define EXPIRATION_DATE @"expiration_date"
+#define IS_USE_ONE_POST @"is_use_one_post"
 
 
 + (NSString *) getAccessToken {
@@ -39,7 +40,10 @@
 
 + (BOOL) isUpdateStatus {
 	NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-	return [[pref objectForKey:IS_UPDATE_STATUS] boolValue];
+	NSNumber  *ret = (NSNumber *)[pref objectForKey:IS_UPDATE_STATUS];
+	if (ret == nil)
+		return NO;
+	return [ret boolValue];
 }
 
 + (void) setUpdateStatus:(BOOL)value {
@@ -48,5 +52,18 @@
 	[pref synchronize];
 }
 
++ (BOOL) isUseOnePost {
+	NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+	NSNumber *ret = (NSNumber *)[pref objectForKey:IS_USE_ONE_POST];
+	if (ret == nil)
+		return NO;
+	return [ret boolValue];
+}
+
++ (void) setUseOnePost:(BOOL)value {
+	NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+	[pref setObject:[NSNumber numberWithBool:value] forKey:IS_USE_ONE_POST];
+	[pref synchronize];
+}
 @end
 

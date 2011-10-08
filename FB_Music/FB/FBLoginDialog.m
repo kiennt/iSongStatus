@@ -85,6 +85,8 @@
   if (!(([error.domain isEqualToString:@"NSURLErrorDomain"] && error.code == -999) ||
         ([error.domain isEqualToString:@"WebKitErrorDomain"] && error.code == 102))) {
     [super webView:webView didFailLoadWithError:error];
+	  NSLog(@"error: %@", [error localizedDescription]);
+	  NSLog(@"error: %@", [error description]);
     if ([_loginDelegate respondsToSelector:@selector(fbDialogNotLogin:)]) {
       [_loginDelegate fbDialogNotLogin:NO];
     }

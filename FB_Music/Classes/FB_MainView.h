@@ -13,21 +13,30 @@
 @class Facebook;
 
 @interface FB_MainView : UIViewController
-	<UINavigationBarDelegate, FBRequestDelegate, FBDialogDelegate, FBSessionDelegate>
+	<UINavigationBarDelegate, FBSessionDelegate, FBDialogDelegate, FBRequestDelegate>
 {
 	IBOutlet UILabel *songLabel;
-	IBOutlet UIBarButtonItem *settingBtn;
-	
+	IBOutlet UILabel *appStatusLabel;
+	IBOutlet UIBarButtonItem *settingBtn;	
 	FBLoginButton *fbLoginBtn;
-	Facebook *facebook;
-	NSMutableArray *permissions;	
+	NSMutableDictionary *postDict;
+	NSString *lastPost;
 }
 
 @property (nonatomic, retain) UILabel *songLabel;
+@property (nonatomic, retain) UILabel *appStatusLabel;
 @property (nonatomic, retain) UIBarButtonItem *settingBtn;
 @property (nonatomic, retain) FBLoginButton *fbLoginBtn;
-@property (nonatomic, retain) Facebook *facebook;
 
-- (IBAction) settingBtnSelected:(id) sender;
+/*
+ * @purpose:
+ *		Handle action when user click on FB login button
+ *		If user are not logged in, ask user logged in
+ *		Otherwise, logged out for user
+ * @param
+ *		sender - fbLoginBtn
+ */
 - (void) fbLoginBtnClick:(id)sender;
+
+- (IBAction) settingBtnSelected:(id)sender;
 @end

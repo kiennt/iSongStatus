@@ -10,7 +10,7 @@
 #import "UserSettings.h"
 
 @implementation FB_SettingsView
-@synthesize updateStatusSwitch, cell1, table;
+@synthesize updateStatusSwitch, useOnePostSwitch, cell1, cell2, table;
 
 #pragma mark -
 #pragma mark View functions
@@ -25,6 +25,7 @@
 	self.navigationItem.title = @"Settings";
 	self.navigationItem.leftBarButtonItem.title = @"Back";
 	updateStatusSwitch.on = [UserSettings isUpdateStatus];
+	useOnePostSwitch.on = [UserSettings isUseOnePost];
     [super viewDidLoad];
 }
 
@@ -36,6 +37,10 @@
 #pragma mark Control functions
 - (IBAction) updateStatusSwitchSelect:(id)sender {
 	[UserSettings setUpdateStatus:updateStatusSwitch.on];
+}
+
+- (IBAction) useOnePostSwitchSelect:(id) sender {
+	[UserSettings setUseOnePost:useOnePostSwitch.on];
 }
 
 
@@ -51,6 +56,14 @@
 
 #pragma mark -
 #pragma mark TableView functions
+/*
+ * @purpose
+ *		Set up title for header in section
+ * @param
+ *		tableView - tableView was setup
+ * @param
+ *		section - section index of tableView
+ */
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (tableView.tag==0) {
         if (section == 0) {
@@ -61,9 +74,17 @@
 }
 
 
+/*
+ * @purpose
+ *		Set up row for table
+ * @param
+ * @param
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if([indexPath row] == 0) 
 		return cell1;
+	if ([indexPath row] == 1)
+		return cell2;
     return nil;
 }
 
@@ -72,7 +93,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 
 

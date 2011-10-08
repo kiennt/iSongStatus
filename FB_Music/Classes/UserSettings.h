@@ -12,8 +12,13 @@
 @interface UserSettings : NSObject {}
 + (NSString *) getAccessToken;
 + (void) setAccessToken:(NSString *)token;
+
 + (NSDate *) getExpirationDate;
 + (void) setExpirationDate:(NSDate *)date;
+
 + (BOOL) isUpdateStatus;
 + (void) setUpdateStatus:(BOOL) value;
+
++ (BOOL) isUseOnePost;
++ (void) setUseOnePost:(BOOL) value;
 @end

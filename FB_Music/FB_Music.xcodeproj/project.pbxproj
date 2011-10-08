@@ -32,6 +32,8 @@
 		E75EC17B143A6B2F0017DB85 /* FB_SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75EC179143A6B2F0017DB85 /* FB_SettingsView.m */; };
 		E75EC17C143A6B2F0017DB85 /* FB_SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E75EC17A143A6B2F0017DB85 /* FB_SettingsView.xib */; };
 		E75EC1D7143A70B90017DB85 /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = E75EC1D6143A70B90017DB85 /* UserSettings.m */; };
+		E7E32F1B143EBAB900CC867E /* TaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E32F1A143EBAB900CC867E /* TaskManager.m */; };
+		E7FF0BC1143DF79B00181175 /* FB_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FF0BC0143DF79B00181175 /* FB_Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +82,10 @@
 		E75EC17A143A6B2F0017DB85 /* FB_SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FB_SettingsView.xib; path = Classes/FB_SettingsView.xib; sourceTree = "<group>"; };
 		E75EC1D5143A70B90017DB85 /* UserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettings.h; sourceTree = "<group>"; };
 		E75EC1D6143A70B90017DB85 /* UserSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettings.m; sourceTree = "<group>"; };
+		E7E32F19143EBAB900CC867E /* TaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskManager.h; sourceTree = "<group>"; };
+		E7E32F1A143EBAB900CC867E /* TaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskManager.m; sourceTree = "<group>"; };
+		E7FF0BBF143DF79B00181175 /* FB_Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FB_Utils.h; sourceTree = "<group>"; };
+		E7FF0BC0143DF79B00181175 /* FB_Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FB_Utils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +115,10 @@
 				E75EC179143A6B2F0017DB85 /* FB_SettingsView.m */,
 				E75EC1D5143A70B90017DB85 /* UserSettings.h */,
 				E75EC1D6143A70B90017DB85 /* UserSettings.m */,
+				E7FF0BBF143DF79B00181175 /* FB_Utils.h */,
+				E7FF0BC0143DF79B00181175 /* FB_Utils.m */,
+				E7E32F19143EBAB900CC867E /* TaskManager.h */,
+				E7E32F1A143EBAB900CC867E /* TaskManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -288,6 +298,8 @@
 				E75EC0AA143A5C720017DB85 /* FB_MainView.m in Sources */,
 				E75EC17B143A6B2F0017DB85 /* FB_SettingsView.m in Sources */,
 				E75EC1D7143A70B90017DB85 /* UserSettings.m in Sources */,
+				E7FF0BC1143DF79B00181175 /* FB_Utils.m in Sources */,
+				E7E32F1B143EBAB900CC867E /* TaskManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

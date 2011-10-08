@@ -168,6 +168,7 @@ static NSString* kSDKVersion = @"2";
       }
       NSString *urlPrefix = [NSString stringWithFormat:@"%@://%@", scheme, kFBAppAuthURLPath];
       NSString *fbAppUrl = [FBRequest serializeURL:urlPrefix params:params];
+      NSLog(@"fbAppUrl: %@", fbAppUrl);
       didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:fbAppUrl]];
     }
 
@@ -215,8 +216,7 @@ static NSString* kSDKVersion = @"2";
 #pragma mark Public function
 
 - (void)authorize:(NSArray *)permissions {
-  [self authorize:permissions
-       urlSchemeSuffix:nil];
+  [self authorize:permissions urlSchemeSuffix:nil];
 }
 
 /**
@@ -271,8 +271,8 @@ static NSString* kSDKVersion = @"2";
        urlSchemeSuffix:(NSString *)urlSchemeSuffix {
   self.urlSchemeSuffix = urlSchemeSuffix;
   self.permissions = permissions;
-
-  [self authorizeWithFBAppAuth:YES safariAuth:YES];
+  // TODO: has bug with FBAppAuth, we dont use it
+  [self authorizeWithFBAppAuth:NO safariAuth:YES];
 }
 
 /**
@@ -309,6 +309,7 @@ static NSString* kSDKVersion = @"2";
   }
 
   NSDictionary *params = [self parseURLParams:query];
+	NSLog(@"params: %@, url: %@", params, url);
   NSString *accessToken = [params valueForKey:@"access_token"];
 
   // If the URL doesn't contain the access token, an error has occurred.
@@ -544,6 +545,7 @@ static NSString* kSDKVersion = @"2";
                  andDelegate:(id <FBRequestDelegate>)delegate {
 
   NSString * fullURL = [kGraphBaseURL stringByAppendingString:graphPath];
+  NSLog(@"full url: %@", fullURL); 
   return [self openUrl:fullURL
                 params:params
             httpMethod:httpMethod

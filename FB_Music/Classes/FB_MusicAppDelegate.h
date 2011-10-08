@@ -12,7 +12,10 @@
     IBOutlet UIWindow *window;
 	IBOutlet UINavigationController *navigationController;
 	dispatch_block_t expirationHandler;
+	dispatch_queue_t task_queue;
 	UIBackgroundTaskIdentifier bgTask; 
+	BOOL isCreateBackgrounTask;
+	BOOL isInBackgroundMode;
 }
 
 @property (nonatomic, retain) UIWindow *window;

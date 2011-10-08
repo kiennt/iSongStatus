@@ -8,8 +8,16 @@
 
 #import "FB_MusicAppDelegate.h"
 #import "FB_MainView.h"
+#import "FB_Utils.h"
 #import <Foundation/Foundation.h>
+#import <MediaPlayer/MediaPlayer.h>
 #import <unistd.h>
+
+//@interface FB_MusicAppDelegate (Private)
+//- (void) registerMusicNotificationService;
+//- (void) handleItemChanged:(NSNotification *)notification;
+//@end
+
 
 @implementation FB_MusicAppDelegate
 
@@ -21,6 +29,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions { 		
     [self.window makeKeyAndVisible]; 
 	[self.window addSubview:navigationController.view];
+	isCreateBackgrounTask = NO;
+	isInBackgroundMode = NO;
     return YES;
 }
 
@@ -28,32 +38,36 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
 }
 
+- (void) initBackgroundTasks {
+	UIApplication *app = [UIApplication sharedApplication];	
+	bgTask = [app beginBackgroundTaskWithExpirationHandler:expirationHandler];
+}
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-	NSLog(@"enter background");
-//	UIApplication *app = [UIApplication sharedApplication];	
-//	bgTask = [app beginBackgroundTaskWithExpirationHandler:expirationHandler];
-//	
-//	expirationHandler = ^{
-//		NSLog(@"handler expiration");
-//		[app endBackgroundTask:bgTask];
-//		bgTask = UIBackgroundTaskInvalid;				
-//		bgTask = [app beginBackgroundTaskWithExpirationHandler:expirationHandler];
-//	};
-//	
-//    // Start the long-running task and return immediately.
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//		int count = 0;
-//		while (1) {
-//			NSLog(@"long running task: %d", ++count);
-//			sleep(1);
-//		}
-//    }); 
+	isInBackgroundMode = YES;
+	
+	if (!isCreateBackgrounTask) {
+		[self initBackgroundTasks];
+		
+		expirationHandler = ^{
+			// close old background task
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+				NSLog(@"handler expiration");
+				UIApplication *app = [UIApplication sharedApplication];
+				[app endBackgroundTask:bgTask];
+				bgTask = UIBackgroundTaskInvalid;				
+			});
+			
+			[self initBackgroundTasks];
+		};							
+		
+		isCreateBackgrounTask = YES;		
+	}		
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-	// close background task 
+	isInBackgroundMode = NO;
 }
 
 
@@ -66,8 +80,8 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-	FB_MainView *mainView = (FB_MainView *)[navigationController topViewController];
-	return [mainView.facebook handleOpenURL:url];
+	FB_Utils *fbUtil = [FB_Utils sharedFB_Utils];
+	return [fbUtil.facebook handleOpenURL:url];
 }
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {

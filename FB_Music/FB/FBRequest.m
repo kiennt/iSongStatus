@@ -180,7 +180,6 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
   NSString* responseString = [[[NSString alloc] initWithData:data
                                                     encoding:NSUTF8StringEncoding]
                               autorelease];
-  NSLog(@"response: %@", responseString);
   SBJSON *jsonParser = [[SBJSON new] autorelease];
   if ([responseString isEqualToString:@"true"]) {
     return [NSDictionary dictionaryWithObject:@"true" forKey:@"result"];
@@ -250,11 +249,9 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
   }
 
   if ([_delegate respondsToSelector:@selector(request:didLoad:)] ||
-      [_delegate respondsToSelector:
-          @selector(request:didFailWithError:)]) {
+      [_delegate respondsToSelector:@selector(request:didFailWithError:)]) {
     NSError* error = nil;
     id result = [self parseJsonResponse:data error:&error];
-
     if (error) {
       [self failWithError:error];
     } else if ([_delegate respondsToSelector:
